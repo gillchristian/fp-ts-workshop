@@ -5,148 +5,221 @@ import {
 } from "code-surfer";
 import { github, vsDark } from "@code-surfer/themes";
 
+import pngLangsSpectrum from './images/langs-spectrum.png'
+import pngTopicsSpectrum from './images/topics-spectrum.png'
+import pngCompositionVsBlackbox from './images/composition-vs-blackbox.png'
+import pngCompositionFractal from './images/composition-fractal.png'
+import pngEffectsDontCompose from './images/effects-dont-compose.png'
+import pngComposedEffects from './images/effects-composed.png'
+
 export const theme = vsDark;
 
-# Hello 👋
+<h1>
+  Strongly typed
+  <br />
+  Functional Programming
+  <br />
+  Workshop 🏋️🦄
+</h1>
 
-You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](https://codesurfer.pomb.us)
+<div style={{ position: 'fixed', bottom: 30, right: 30, margin: 0, padding: 0 }}>
+
+<a href="https://gillchristian.xyz">Christian Gill</a> @ <a href="https://catawiki.com">Catawiki</a>
+
+</div>
+
+---
+
+- Intro & disclaimers
+
+- Type Driven Development
+
+- Composition
+
+- fp-ts: the basics
+
+- io-ts: safe IO
+
+- fp-ts: Functors
+
+---
+
+## [Introduction / Recap](https://fp-for-the-people-light.gillchristian.now.sh/)
+
+---
+
+## 🙄 Disclaimers ❗
+
+---
+
+<img src={pngLangsSpectrum} />
+
+---
+
+<img src={pngTopicsSpectrum} />
+
+---
+
+### 🤷 TypeScript 🤷
+
+---
+
+### 😱 There will be FP theory 🤦
+
+---
+
+### 🦄 There will be FP theory 🎉
 
 ---
 
 <CodeSurfer>
 
-```js title="This is a title" subtitle="and this a subtitle"
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return sit
-    ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor)
-    : [];
-}
+```ts title="Type signatures"
+string[]
 
-function incididunt(ipsum, ut = 1) {
-  ut = labore.et(amet(ut), 0);
-  const sit = ipsum == null ? 0 : ipsum.sit;
-
-  if (!sit || ut < 1) {
-    return [];
-  }
-
-  let dolore = 0;
-  let magna = 0;
-  const aliqua = new eiusmod(labore.ut(sit / ut));
-
-  while (dolore < sit) {
-    aliqua[magna++] = consectetur(
-      ipsum,
-      dolore,
-      (dolore += ut)
-    );
-  }
-
-  return aliqua;
-}
+[string]
 ```
 
-```js
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return sit
-    ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor)
-    : [];
-}
+```ts title="Type signatures"
+Promise<User>
 
-function adipiscing(...elit) {
-  if (!elit.sit) {
-    return [];
-  }
-
-  const sed = elit[0];
-  return eiusmod.tempor(sed) ? sed : [sed];
-}
-
-function incididunt(ipsum, ut = 1) {
-  ut = labore.et(amet(ut), 0);
-  const sit = ipsum == null ? 0 : ipsum.sit;
-
-  if (!sit || ut < 1) {
-    return [];
-  }
-
-  let dolore = 0;
-  let magna = 0;
-  const aliqua = new eiusmod(labore.ut(sit / ut));
-
-  while (dolore < sit) {
-    aliqua[magna++] = consectetur(
-      ipsum,
-      dolore,
-      (dolore += ut)
-    );
-  }
-
-  return aliqua;
-}
+Promise User
 ```
 
-```diff 1[10:14],2[15:19],3[22:27],10:12
+```ts title="Type signatures"
+Map<Key, Value>
 
+Map Key Value
+```
+
+```ts title="Type signatures"
+(str: string) => number
+
+string -> number
+```
+
+```ts title="Type signatures"
+(str: string, what: string, to: string) => string
+
+(string, string, string) -> string
+```
+
+```ts title="Type signatures"
+<A, B>(f: (a: A) => B) => A[] => B[]
+
+(a -> b) -> [a] -> [b]
+```
+
+```ts title="Type signatures"
+(method: Method) => (url: string, conf: Config) => Promise<User>
+
+HttpMethod -> (string, Config) -> Promise User 
 ```
 
 </CodeSurfer>
 
 ---
 
-<CodeSurferColumns themes={[vsDark, github]}>
+## 👮 Type Driven Development 🛡️
 
-<Step>
-
-```js
-const magna = aliqua => aliqua.ut((enim, ad) => enim, 0);
-```
-
-```js
-const minim = (ad, enim) => dolore.magna(ad / enim);
-```
-
-</Step>
-
-<Step>
-
-```js
-const lorem = (ipsum, dolor, sit) => {
-  const amet = dolor - ipsum;
-  return consectetur.adipiscing(
-    {
-      elit: sed.eiusmod(sit - dolor) / amet + 2,
-    },
-    (tempor, incididunt) => ipsum + amet * incididunt
-  );
-};
-
-const magna = aliqua => aliqua.ut((enim, ad) => enim, 0);
-```
-
-```js
-const minim = (ad, enim) => dolore.magna(ad / enim);
-
-const sed = (eiusmod, tempor, incididunt) => {
-  const ut = tempor - eiusmod;
-  return labore.et(
-    {
-      amet: dolore.magna(incididunt - tempor) / ut + 2,
-    },
-    (aliqua, elit) => eiusmod + ut * elit
-  );
-};
-```
-
-</Step>
-
-</CodeSurferColumns>
+`src/00-tdd.ts`
 
 ---
 
-docs:  
-[codesurfer.pomb.us](https://codesurfer.pomb.us)
+<CodeSurfer>
+
+```ts title="src/01-tdd.ts"
+interface AsyncData<D> {
+  isLoading: boolean;
+  didLoading: boolean;
+  data?: D;
+  error?: Error;
+}
+```
+
+```ts title="src/01-tdd.ts"
+interface AsyncData<D> {
+  isLoading: boolean;
+  didLoading: boolean;
+  data?: D;
+  error?: Error;
+}
+
+type RemoteData<D> =
+  | { tag: 'idle' }
+  | { tag: 'loading' }
+  | { tag: 'success', data: D }
+  | { tag: 'failure', error: Error }
+```
+
+</CodeSurfer>
+
+---
+
+## 🧱 FP It's all about composition 📦
+
+---
+
+<div style={{ padding: 50 }}>
+
+<img src={pngCompositionVsBlackbox} />
+
+</div>
+
+---
+
+<div style={{ padding: 50 }}>
+
+<img src={pngCompositionFractal} />
+
+</div>
+
+---
+
+<div style={{ padding: 100 }}>
+
+<img src={pngEffectsDontCompose} />
+
+</div>
+
+---
+
+<div style={{ padding: 100 }}>
+
+<img src={pngComposedEffects} />
+
+</div>
+
+---
+
+[fp-ts](https://gcanti.github.io/fp-ts/) & friends 💪
+
+---
+
+pipe / flow / Array / NonEmptyArray
+
+https://gcanti.github.io/fp-ts/modules/pipeable.ts.html
+
+https://gcanti.github.io/fp-ts/modules/function.ts.html
+
+https://gcanti.github.io/fp-ts/modules/Array.ts.html
+
+---
+
+[io-ts](https://github.com/gcanti/io-ts) Safe IO
+
+---
+
+Either right or left
+
+https://gcanti.github.io/fp-ts/modules/Either.ts.html
+
+---
+
+Option
+
+https://gcanti.github.io/fp-ts/modules/Option.ts.html
+
+---
+
+We have so much in common ... (Functor?)
