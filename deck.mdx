@@ -113,7 +113,7 @@ string -> number
 ```ts title="Type signatures"
 (method: Method) => (url: string, conf: Config) => Promise<User>
 
-HttpMethod -> (string, Config) -> Promise User 
+Method -> (string, Config) -> Promise User 
 ```
 
 </CodeSurfer>
@@ -192,34 +192,24 @@ type RemoteData<D> =
 
 ---
 
-[fp-ts](https://gcanti.github.io/fp-ts/) & friends 💪
+### Boxes 📦
+
+`src/02.box.ts`
 
 ---
 
-pipe / flow / Array / NonEmptyArray
+### [fp-ts](https://gcanti.github.io/fp-ts/) & friends 💪
 
-https://gcanti.github.io/fp-ts/modules/pipeable.ts.html
-
-https://gcanti.github.io/fp-ts/modules/function.ts.html
-
-https://gcanti.github.io/fp-ts/modules/Array.ts.html
+`src/03-fp-ts.ts`
 
 ---
 
-[io-ts](https://github.com/gcanti/io-ts) Safe IO
+Safe IO [io-ts](https://github.com/gcanti/io-ts)
+
+`src/04-io-ts.ts`
 
 ---
 
 Either right or left
 
-https://gcanti.github.io/fp-ts/modules/Either.ts.html
-
----
-
-Option
-
-https://gcanti.github.io/fp-ts/modules/Option.ts.html
-
----
-
-We have so much in common ... (Functor?)
+`src/05-either.ts`
