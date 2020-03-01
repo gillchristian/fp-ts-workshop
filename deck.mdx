@@ -2,15 +2,17 @@ import {
   CodeSurfer,
   CodeSurferColumns,
   Step,
-} from "code-surfer";
-import { github, vsDark } from "@code-surfer/themes";
+} from 'code-surfer';
+import { github, vsDark } from '@code-surfer/themes';
 
-import pngLangsSpectrum from './images/langs-spectrum.png'
-import pngTopicsSpectrum from './images/topics-spectrum.png'
-import pngCompositionVsBlackbox from './images/composition-vs-blackbox.png'
-import pngCompositionFractal from './images/composition-fractal.png'
-import pngEffectsDontCompose from './images/effects-dont-compose.png'
-import pngComposedEffects from './images/effects-composed.png'
+import pngLangsSpectrum from './images/langs-spectrum.png';
+import pngTopicsSpectrum from './images/topics-spectrum.png';
+import pngCompositionVsBlackbox from './images/composition-vs-blackbox.png';
+import pngCompositionFractal from './images/composition-fractal.png';
+import pngEffectsDontCompose from './images/effects-dont-compose.png';
+import pngComposedEffects from './images/effects-composed.png';
+import gifRound2 from './images/round-2.gif';
+import gifItsOn from './images/its-on.gif';
 
 export const theme = vsDark;
 
@@ -128,7 +130,7 @@ Method -> (string, Config) -> Promise User
 
 <CodeSurfer>
 
-```ts title="src/01-tdd.ts"
+```ts title="src/01.tdd.ts"
 interface AsyncData<D> {
   isLoading: boolean;
   didLoading: boolean;
@@ -137,7 +139,7 @@ interface AsyncData<D> {
 }
 ```
 
-```ts title="src/01-tdd.ts"
+```ts title="src/01.tdd.ts"
 interface AsyncData<D> {
   isLoading: boolean;
   didLoading: boolean;
@@ -192,24 +194,82 @@ type RemoteData<D> =
 
 ---
 
-### Boxes 📦
 
-`src/02.box.ts`
+<div
+  style={{
+    height: '100vh',
+    width: '100vw',
+    backgroundImage: `url(${gifRound2})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }}
+>
+
+## Round 2
+
+</div>
 
 ---
 
-### [fp-ts](https://gcanti.github.io/fp-ts/) & friends 💪
+## 📓 Recap
 
-`src/03-fp-ts.ts`
+- FP intro
+    - Goals: what we want to achieve
+    - Higher Order Functions
+    - Pure Functions
+- Type Safety / Type Driven Development
+- Composition
 
 ---
 
-Safe IO [io-ts](https://github.com/gcanti/io-ts)
-
-`src/04-io-ts.ts`
+<img src={gifItsOn} style={{ height: '100vh' }} />
 
 ---
 
-Either right or left
+### 🧱 [fp-ts](https://gcanti.github.io/fp-ts/) 🧱
 
-`src/05-either.ts`
+- `flow` and `pipe` (composition) 🧪
+- Array utils
+- Data last curried functions 🍛
+
+`src/02.fp-ts.ts`
+
+---
+
+### 📦 Boxed types
+
+- Containers for:
+    - Collections (Array)
+    - Async operations (Promise / Task)
+    - Error handling (Either)
+    - Nullable or optional values (Option / Maybe)
+    - Async state (RemoteData)
+
+`src/03.box.ts`
+
+---
+
+### 🛡️ Safe IO [io-ts](https://github.com/gcanti/io-ts)
+
+Safe runtime decoding (and encoding) of unkown payloads
+
+`src/04.io-ts.ts`
+
+---
+
+### Either 👈👉
+
+Functional error handling
+
+`src/05.either.ts`
+
+---
+
+### Option 🤔
+
+Functional optionals (nullable) handling
+
+`src/06.option.ts`
